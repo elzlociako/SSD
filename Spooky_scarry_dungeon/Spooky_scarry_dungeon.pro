@@ -13,4 +13,8 @@ CONFIG(debug, debug|release){
 }
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        tilemap.cpp
+
+HEADERS += \
+    tilemap.h
