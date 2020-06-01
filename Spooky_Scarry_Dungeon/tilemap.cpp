@@ -10,7 +10,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const std:
     while(!file.eof()){
         file >> TileLocation;
         tiles = atoi(TileLocation.c_str());
-        map.emplace_back(tiles);
+        map.emplace_back(std::make_unique<int>(tiles));
     }
 
     // load the tileset texture
@@ -26,7 +26,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const std:
         for (unsigned int j = 0; j < height; ++j)
         {
             // get the current tile number
-            int tileNumber = map[i + j * width];
+            int &tileNumber = *map[i + j * width];
 
             // find its position in the tileset texture
             int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
