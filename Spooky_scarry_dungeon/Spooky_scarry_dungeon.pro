@@ -13,8 +13,23 @@ CONFIG(debug, debug|release){
 }
 
 SOURCES += \
+        arrow.cpp \
+        bags.cpp \
+        character.cpp \
+        enemy.cpp \
+        hero.cpp \
+        hud.cpp \
         main.cpp \
+        rooms.cpp \
         tilemap.cpp
 
 HEADERS += \
-    tilemap.h
+    Biblioteki.h \
+    arrow.h \
+    bags.h \
+    character.h \
+    hero.h \
+    hud.h \
+    rooms.h \
+    tilemap.h \
+    enemy.h \
