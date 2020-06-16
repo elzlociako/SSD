@@ -12,11 +12,11 @@ class Rooms
 public:
     Rooms();
 
-    void Room_1(TileMap &map, Hero &player, float &dt, HUD &hud);
-    void Room_2(TileMap &map, Hero &player, float &dt, HUD &hud);
-    void Room_3(TileMap &map, Hero &player, float &dt, HUD &hud);
-    void Room_4(TileMap &map, Hero &player, float &dt, HUD &hud);
-    void Room_5(TileMap &map, Hero &player, float &dt, HUD &hud);
+    void Room_1(TileMap &map, Hero &player, float &dt);
+    void Room_2(TileMap &map, Hero &player, float &dt);
+    void Room_3(TileMap &map, Hero &player, float &dt);
+    void Room_4(TileMap &map, Hero &player, float &dt);
+    void Room_5(TileMap &map, Hero &player, float &dt);
 
     int enemies_size1();
     int enemies_size2();

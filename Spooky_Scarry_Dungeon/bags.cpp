@@ -9,11 +9,6 @@ Bags::Bags(const sf::Vector2f &size, const std::string &path, const int &val)
     value_ = val;
 }
 
-Bags::~Bags()
-{
-
-}
-
 bool Bags::isPicked()
 {
     return is_picked_;

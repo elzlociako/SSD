@@ -2,6 +2,7 @@
 #define HUD_H
 
 #include <Biblioteki.h>
+#include <bags.h>
 #include <hero.h>
 
 class HUD
@@ -10,7 +11,6 @@ public:
     HUD();
 
     void HP_Update(Hero &hero);
-    void HP_Def();
     void RenderGUI(sf::RenderTarget &target);
 
     void Points(Hero &hero);
@@ -24,7 +24,8 @@ private:
     float width = 300.f;
 
     sf::Font font;
-    sf::Text text;
+    sf::Text textE;
+    sf::Text textW;
 
 };
 

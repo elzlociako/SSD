@@ -14,6 +14,18 @@ int main()
         view.setCenter(sf::Vector2f(111.f, 991.f));
         view.setSize(1024.f/4, 768.f/4);
 
+        //Text
+        //-----------------------------------------------------------------------------------------------
+        sf::Font Win_font;
+        Win_font.loadFromFile("C:/Users/szymo/OneDrive/Game_PSiO/SSD/Font/retro_computer_personal_use.ttf");
+        sf::Text Win_text;
+        Win_text.setFont(Win_font);
+        Win_text.setFillColor(sf::Color::White);
+        Win_text.setCharacterSize(150);
+        Win_text.setPosition(100, 300);
+        Win_text.setString("YOU WIN!");
+        //-----------------------------------------------------------------------------------------------
+
         //Map creation
         TileMap map;
         TileMap map2;
@@ -60,7 +72,6 @@ int main()
 
         while (window.isOpen())
         {
-
             dt = dtClock.restart().asSeconds();
 
             // handle events
@@ -74,44 +85,43 @@ int main()
             player.Animate(dt, map, view);
             player.Shooting(map, window); 
             player.PickUp(bags);
+            hud.HP_Update(player);
+            player.DamageFromSpikes(map2, window);
 
-            //Mouse position
-            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
-            sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
-            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-                std::cout<<worldPos.x<<"  "<<worldPos.y<<std::endl;
-            }
+//            //Mouse position
+//            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+//            sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+//            if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+//                std::cout<<worldPos.x<<"  "<<worldPos.y<<std::endl;
+//            }
 
             if(rooms.Room_1ON())
-                rooms.Room_1(map, player, dt, hud);
+                rooms.Room_1(map, player, dt);
 
             if(rooms.Room_2ON())
-                rooms.Room_2(map, player, dt, hud);
+                rooms.Room_2(map, player, dt);
 
             if(rooms.Room_3ON())
-                rooms.Room_3(map, player, dt, hud);
+                rooms.Room_3(map, player, dt);
 
             if(rooms.Room_4ON())
-                rooms.Room_4(map, player, dt, hud);
+                rooms.Room_4(map, player, dt);
 
             if(rooms.Room_5ON())
-                rooms.Room_5(map, player, dt, hud);
+                rooms.Room_5(map, player, dt);
 
             hud.Points(player);
-            hud.HP_Def();         
-
-            std::cout<<player.initHealth()<<" "<<player.DamageReceived()<<"  "<<player.isDamaged()<<std::endl;
 
             if(player.initHealth() <= 0){
                 window.close();
             }
 
-            // draw
+            //DRAW
             window.clear();
-
             window.setView(view);
-            window.draw(map);
 
+            //Maps draw
+            window.draw(map);
             if(player.spawn_enemies(map, 2) && rooms.enemies_size1() > 0){
                 window.draw(map2);
             }
@@ -128,24 +138,23 @@ int main()
                 window.draw(map2);
             }
 
-            if(rooms.Room_1ON() == false && rooms.Room_2ON() == false && rooms.Room_3ON() == false && rooms.Room_4ON() == false && rooms.Room_5ON() == false){
-                std::cout<<"WIN"<<std::endl;
-            }
-
             //Player draw
             window.draw(player);
             player.render(window);
             rooms.RenderRoom(window);
 
-            //Bags
+            //Bags draw
             for(unsigned int i = 0; i < bags.size(); i++){
                 window.draw(*bags[i]);
             }
 
-            //hud draw
+            //HUD draw
             hud.RenderGUI(window);
 
-            //window.setView(view);
+            if(rooms.Room_1ON() == false && rooms.Room_2ON() == false && rooms.Room_3ON() == false && rooms.Room_4ON() == false && rooms.Room_5ON() == false){
+                window.draw(Win_text);
+            }
+
             window.setView(view);
             window.display();
         }

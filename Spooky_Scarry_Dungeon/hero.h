@@ -13,14 +13,16 @@ public:
     void Shooting(const TileMap &map, sf::RenderWindow &w);
     void render(sf::RenderTarget &target);
 
+    void DamageFromSpikes(const TileMap &map, sf::RenderWindow &w);
     int DamageReceived();
 
+    void Heal(const int &h);
     int initMaxHealth();
     int initHealth();
 
+
     void Damaged(int dam);
     bool isDamaged();
-
     void PickUp(std::vector<std::unique_ptr<Bags>> &bags);
 
     bool isDam = false;

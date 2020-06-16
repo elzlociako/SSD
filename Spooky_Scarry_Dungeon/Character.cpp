@@ -11,9 +11,9 @@ void character::Update()
 {
 
     bottom = getPosition().y + getSize().y;
-    top = getPosition().y + 15;
-    left = getPosition().x + 8;
-    right = getPosition().x + getSize().x - 8;
+    top = getPosition().y + 7;
+    left = getPosition().x;
+    right = getPosition().x + getSize().x;
 
     sf::Vector2f TopLeft(sf::Vector2i((int)left/16, (int)top/16));
     sf::Vector2f TopRight(sf::Vector2i((int)right/16, (int)top/16));

@@ -82,7 +82,7 @@ void Enemy::Magic_Attack(Hero &hero, const TileMap &map, float time_s)
 
     if (ShootTimer.getElapsedTime().asSeconds() > time_s)
     {
-        black_arrow.setPosition(sf::Vector2f((getPosition().x + getPosition().x + 24 )/ 2, (getPosition().y + getPosition().y + 24 )/ 2));
+        black_arrow.setPosition(sf::Vector2f((getPosition().x + getPosition().x + getSize().x)/ 2, (getPosition().y + getPosition().y + getSize().y)/ 2));
         black_arrow.currVelocity = Normalized * black_arrow.maxSpeed_;
         black_arrows.push_back(std::make_unique<Arrow>(black_arrow));
         ShootTimer.restart();

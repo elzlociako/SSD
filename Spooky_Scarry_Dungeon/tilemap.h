@@ -15,6 +15,7 @@ public:
 
 public:
     std::vector<std::vector<int>> cmap;
+    std::vector<std::unique_ptr<int>> number_map;
     int NUM;
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -24,9 +25,6 @@ private:
     unsigned int height_;
     int tiles_;
     std::string MapLoaded_;
-
-    std::vector<std::unique_ptr<int>> number_map;
-     std::vector<std::unique_ptr<int>> number_map2;
 
     std::string TileLocation;
     sf::VertexArray vertices_;

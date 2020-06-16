@@ -7,11 +7,12 @@ Hero::Hero(sf::Vector2f positon, sf::Vector2f size, const std::string &path)
     this->setSize(size);
     texture_.loadFromFile(path);
     setTexture(&texture_);
+    setFillColor(sf::Color::White);
 }
 
 void Hero::Shooting(const TileMap &map, sf::RenderWindow &w)
 {
-    playerCenter_ = sf::Vector2f((getPosition().x + getPosition().x + 24 )/ 2, (getPosition().y + getPosition().y + 24 )/ 2);
+    playerCenter_ = sf::Vector2f((getPosition().x + getPosition().x + getSize().x)/ 2, (getPosition().y + getPosition().y + getSize().y)/ 2);
     mousePosWindow_ = sf::Vector2f(w.mapPixelToCoords(sf::Mouse::getPosition(w)));
     aimDir_ = mousePosWindow_ - playerCenter_;
     aimDirNorm_ = aimDir_ / sqrt(pow(aimDir_.x, 2.f) + pow(aimDir_.y, 2.f));
@@ -42,6 +43,10 @@ void Hero::Shooting(const TileMap &map, sf::RenderWindow &w)
     }
 }
 
+void Hero::DamageFromSpikes(const TileMap &map, sf::RenderWindow &w)
+{
+
+}
 
 void Hero::render(sf::RenderTarget &target)
 {
@@ -68,7 +73,6 @@ void Hero::Damaged(int dam)
 {
         Damage = dam;
         Health -= Damage;
-        hit_time.restart();
 }
 
 int Hero::DamageReceived()
@@ -84,6 +88,16 @@ void Hero::PickUp(std::vector<std::unique_ptr<Bags>> &bags)
         {
             bags[i]->setPick(true);
             bags.erase(bags.begin() + i);
+            Heal(50);
         }
+    }
+}
+
+void Hero::Heal(const int &h)
+{
+    Health = Health + h;
+    if(Health > 100)
+    {
+        Health = 100;
     }
 }
