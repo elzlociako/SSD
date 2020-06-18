@@ -45,6 +45,11 @@ private:
     bool SpawnEnemies4 = false;
     bool SpawnEnemies5 = false;
 
+    sf::SoundBuffer hitSoundBuf;
+    sf::Sound hitSound;
+
+    sf::SoundBuffer hitPlayerSoundBuf;
+    sf::Sound hitPlayerSound;
 
 };
 

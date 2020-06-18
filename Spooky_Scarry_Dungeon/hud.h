@@ -12,20 +12,27 @@ public:
 
     void HP_Update(Hero &hero);
     void RenderGUI(sf::RenderTarget &target);
+    void RenderWIN(sf::RenderTarget &target);
+    void RenderMENU(sf::RenderTarget &target);
 
     void Points(Hero &hero);
     void initFont();
     void initText();
 
+    void initWinText();
+    void initMENU();
+
+    bool bo = true;
+
 private:
     sf::RectangleShape HP;
-    sf::RectangleShape HP_background;
-
-    float width = 300.f;
+    sf::RectangleShape HP_background;;
 
     sf::Font font;
     sf::Text textE;
-    sf::Text textW;
+    sf::Text Win_text;
+    sf::Text MenuText1;
+    sf::Text MenuText2;
 
 };
 

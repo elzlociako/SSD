@@ -12,7 +12,7 @@ public:
 
     void render(sf::RenderTarget &target);
     void Move_to_player(const Hero &hero, float &dt);
-    void Shooting(Hero &hero, const TileMap &map, float time_s, const sf::Vector2f &size = sf::Vector2f(4.f, 9.f), const std::string &s = "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/dark_arrow.png");
+    void Shooting(Hero &hero, const TileMap &map, float time_s, const sf::Vector2f &size = sf::Vector2f(4.f, 9.f), const std::string &s = "Grafiki/dark_arrow.png");
 
     void Magic_Attack(Hero &hero, const TileMap &map, float time_s);
 
@@ -21,7 +21,7 @@ public:
 
 public:
     //Arrows
-    Arrow black_arrow = Arrow (sf::Vector2f(4.f, 9.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/dark_arrow.png", 2.f);
+    Arrow black_arrow = Arrow (sf::Vector2f(4.f, 9.f), "Grafiki/dark_arrow.png", 2.f);
     std::vector<std::unique_ptr<Arrow>> black_arrows;
 
 private:    

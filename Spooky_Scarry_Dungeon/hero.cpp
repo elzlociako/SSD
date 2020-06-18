@@ -7,23 +7,25 @@ Hero::Hero(sf::Vector2f positon, sf::Vector2f size, const std::string &path)
     this->setSize(size);
     texture_.loadFromFile(path);
     setTexture(&texture_);
-    setFillColor(sf::Color::White);
+
+    healSoundBuf.loadFromFile("Muzyka/Heal.wav");
+    healSound.setBuffer(healSoundBuf);
 }
 
 void Hero::Shooting(const TileMap &map, sf::RenderWindow &w)
 {
     playerCenter_ = sf::Vector2f((getPosition().x + getPosition().x + getSize().x)/ 2, (getPosition().y + getPosition().y + getSize().y)/ 2);
-    mousePosWindow_ = sf::Vector2f(w.mapPixelToCoords(sf::Mouse::getPosition(w)));
-    aimDir_ = mousePosWindow_ - playerCenter_;
-    aimDirNorm_ = aimDir_ / sqrt(pow(aimDir_.x, 2.f) + pow(aimDir_.y, 2.f));
+    mousePosition_ = sf::Vector2f(w.mapPixelToCoords(sf::Mouse::getPosition(w)));
+    Mouse_sub_Player_ = mousePosition_ - playerCenter_;
+    Normalized_ = Mouse_sub_Player_ / sqrt(pow(Mouse_sub_Player_.x, 2.f) + pow(Mouse_sub_Player_.y, 2.f));
 
-    float deg = atan2(aimDirNorm_.y, aimDirNorm_.x) * 180 / PI;
+    float deg = atan2(Normalized_.y, Normalized_.x) * 180 / PI;
     arrow.setRotation(deg + 90);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && ShootTimer.getElapsedTime().asSeconds() > 1.f)
     {
         arrow.setPosition(playerCenter_);
-        arrow.currVelocity = aimDirNorm_ * arrow.maxSpeed_;
+        arrow.currVelocity = Normalized_ * arrow.maxSpeed_;
         arrows_.push_back(std::make_unique<Arrow>(arrow));
         ShootTimer.restart();
     }
@@ -87,6 +89,7 @@ void Hero::PickUp(std::vector<std::unique_ptr<Bags>> &bags)
         if(getGlobalBounds().intersects(bags[i]->getGlobalBounds()))
         {
             bags[i]->setPick(true);
+            healSound.play();
             bags.erase(bags.begin() + i);
             Heal(50);
         }

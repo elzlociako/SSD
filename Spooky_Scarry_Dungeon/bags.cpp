@@ -5,7 +5,6 @@ Bags::Bags(const sf::Vector2f &size, const std::string &path, const int &val)
     setSize(size);
     texture_.loadFromFile(path);
     setTexture(&texture_);
-
     value_ = val;
 }
 

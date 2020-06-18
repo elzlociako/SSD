@@ -3,13 +3,18 @@
 
 Rooms::Rooms()
 {
+    hitSoundBuf.loadFromFile("Muzyka/EnemyHit.wav");
+    hitSound.setBuffer(hitSoundBuf);
+    hitSound.setVolume(50.f);
 
+    hitPlayerSoundBuf.loadFromFile("Muzyka/PlayerHit.wav");
+    hitPlayerSound.setBuffer(hitPlayerSoundBuf);
 }
 
 void Rooms::Room_1(TileMap &map, Hero &player, float &dt)
 {
        if(player.spawn_enemies(map, 22) && enemies1.size() < 5){
-            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 100 + 20, rand() % 150 + 700), sf::Vector2f(14.f, 18.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/Characters/Knight/k1.png", 100, rand() % 9 + 1, "Knight");
+            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 100 + 20, rand() % 150 + 700), sf::Vector2f(14.f, 18.f), "Grafiki/Characters/Knight/k1.png", 100, rand() % 9 + 1, "Knight");
             enemies1.emplace_back(std::move(enemy));
         }
 
@@ -19,13 +24,15 @@ void Rooms::Room_1(TileMap &map, Hero &player, float &dt)
         enemies1[i]->Shooting(player, map, rand() % 1 + 2);
 
         if(player.isDamaged()){
+            hitPlayerSound.play();
             player.Damaged(rand() % 5 + 10);
-            player.isDam = false;
+            player.isDam = false;;
         }
 
         for(unsigned int j = 0; j < player.arrows_.size(); j++){
             if(player.arrows_[j]->getGlobalBounds().intersects(enemies1[i]->getGlobalBounds()))
             {
+                hitSound.play();
                 player.arrows_.erase(player.arrows_.begin() + j);
                     enemies1[i]->DamageReceived(30 + rand() % 50);
                         if(enemies1[i]->ActualHealth() <= 0)
@@ -46,7 +53,7 @@ void Rooms::Room_1(TileMap &map, Hero &player, float &dt)
 void Rooms::Room_2(TileMap &map, Hero &player, float &dt)
 {
        if(player.spawn_enemies(map, 33) && enemies2.size() < 7){
-            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 180 + 420, rand() % 165 + 695), sf::Vector2f(14.f, 18.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/Characters/Knight/k1.png", 100, rand() % 9 + 1, "Knight");
+            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 180 + 420, rand() % 165 + 695), sf::Vector2f(14.f, 18.f), "Grafiki/Characters/Knight/k1.png", 100, rand() % 9 + 1, "Knight");
             enemies2.emplace_back(std::move(enemy));
         }
 
@@ -55,6 +62,7 @@ void Rooms::Room_2(TileMap &map, Hero &player, float &dt)
         enemies2[i]->Move_to_player(player, dt);
         enemies2[i]->Shooting(player, map, rand() % 1 + 2);
         if(player.isDamaged()){
+            hitPlayerSound.play();
             player.Damaged(rand() % 5 + 10);
             player.isDam = false;
         }
@@ -62,6 +70,7 @@ void Rooms::Room_2(TileMap &map, Hero &player, float &dt)
         for(unsigned int j = 0; j < player.arrows_.size(); j++){
             if(player.arrows_[j]->getGlobalBounds().intersects(enemies2[i]->getGlobalBounds()))
             {
+                hitSound.play();
                 player.arrows_.erase(player.arrows_.begin() + j);
                     enemies2[i]->DamageReceived(30 + rand() % 50);
                         if(enemies2[i]->ActualHealth() <= 0)
@@ -82,7 +91,7 @@ void Rooms::Room_2(TileMap &map, Hero &player, float &dt)
 void Rooms::Room_3(TileMap &map, Hero &player, float &dt)
 {
        if(player.spawn_enemies(map, 44) && enemies3.size() < 5){
-            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 180 + 420, rand() % 170 + 385), sf::Vector2f(12.f, 18.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/Characters/Knight/k2.png", 130, rand() % 9 + 1, "EliteKnight");
+            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 180 + 420, rand() % 170 + 385), sf::Vector2f(12.f, 18.f), "Grafiki/Characters/Knight/k2.png", 130, rand() % 9 + 1, "EliteKnight");
             enemies3.emplace_back(std::move(enemy));
         }
 
@@ -91,6 +100,7 @@ void Rooms::Room_3(TileMap &map, Hero &player, float &dt)
         enemies3[i]->Move_to_player(player, dt);
         enemies3[i]->Shooting(player, map, rand() % 1 + 2);
         if(player.isDamaged()){
+            hitPlayerSound.play();
             player.Damaged(rand() % 5 + 10);
             player.isDam = false;
         }
@@ -98,6 +108,7 @@ void Rooms::Room_3(TileMap &map, Hero &player, float &dt)
         for(unsigned int j = 0; j < player.arrows_.size(); j++){
             if(player.arrows_[j]->getGlobalBounds().intersects(enemies3[i]->getGlobalBounds()))
             {
+                hitSound.play();
                 player.arrows_.erase(player.arrows_.begin() + j);
                     enemies3[i]->DamageReceived(30 + rand() % 50);
                         if(enemies3[i]->ActualHealth() <= 0)
@@ -118,7 +129,7 @@ void Rooms::Room_3(TileMap &map, Hero &player, float &dt)
 void Rooms::Room_4(TileMap &map, Hero &player, float &dt)
 {
        if(player.spawn_enemies(map, 55) && enemies4.size() < 7){
-            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 185 + 420, rand() % 170 + 35), sf::Vector2f(12.f, 20.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/Characters/Knight/k2.png", 150, rand() % 9 + 1, "EliteKnight");
+            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 185 + 420, rand() % 170 + 35), sf::Vector2f(12.f, 20.f), "Grafiki/Characters/Knight/k2.png", 150, rand() % 9 + 1, "EliteKnight");
             enemies4.emplace_back(std::move(enemy));
         }
 
@@ -127,6 +138,7 @@ void Rooms::Room_4(TileMap &map, Hero &player, float &dt)
         enemies4[i]->Move_to_player(player, dt);
         enemies4[i]->Shooting(player, map, rand() % 1 + 2);
         if(player.isDamaged()){
+            hitPlayerSound.play();
             player.Damaged(rand() % 5 + 10);
             player.isDam = false;
         }
@@ -134,6 +146,7 @@ void Rooms::Room_4(TileMap &map, Hero &player, float &dt)
         for(unsigned int j = 0; j < player.arrows_.size(); j++){
             if(player.arrows_[j]->getGlobalBounds().intersects(enemies4[i]->getGlobalBounds()))
             {
+                hitSound.play();
                 player.arrows_.erase(player.arrows_.begin() + j);
                     enemies4[i]->DamageReceived(30 + rand() % 50);
                         if(enemies4[i]->ActualHealth() <= 0)
@@ -154,15 +167,16 @@ void Rooms::Room_4(TileMap &map, Hero &player, float &dt)
 void Rooms::Room_5(TileMap &map, Hero &player, float &dt)
 {
        if(player.spawn_enemies(map, 66) && enemies5.size() < 2){
-            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 180 + 785, rand() % 170 + 690), sf::Vector2f(32.f, 32.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/Characters/Knight/LK1.png", 450, rand() % 20, "Boss");
+            auto enemy = std::make_unique<Enemy>(sf::Vector2f(rand() % 180 + 785, rand() % 170 + 690), sf::Vector2f(32.f, 32.f), "Grafiki/Characters/Knight/LK1.png", 450, rand() % 20, "Boss");
             enemies5.emplace_back(std::move(enemy));
         }
 
     for(unsigned int i = 0; i< enemies5.size(); i++)
     {
         enemies5[i]->Move_to_player(player, dt);
-        enemies5[i]->Shooting(player, map, rand() % 1 + 2, sf::Vector2f(9.f, 9.f), "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/boss_mag.png");
+        enemies5[i]->Shooting(player, map, rand() % 1 + 2, sf::Vector2f(9.f, 9.f), "Grafiki/boss_mag.png");
         if(player.isDamaged()){
+            hitPlayerSound.play();
             player.Damaged(rand() % 20 + 15);
             player.isDam = false;
         }
@@ -170,6 +184,7 @@ void Rooms::Room_5(TileMap &map, Hero &player, float &dt)
         for(unsigned int j = 0; j < player.arrows_.size(); j++){
             if(player.arrows_[j]->getGlobalBounds().intersects(enemies5[i]->getGlobalBounds()))
             {
+                hitSound.play();
                 player.arrows_.erase(player.arrows_.begin() + j);
                     enemies5[i]->DamageReceived(30 + rand() % 50);
                         if(enemies5[i]->ActualHealth() <= 0)

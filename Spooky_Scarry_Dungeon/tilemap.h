@@ -7,7 +7,7 @@ class TileMap : public sf::Sprite
 {
 public:
     TileMap(sf::Vector2u tileSize = sf::Vector2u(16, 16), unsigned int width = 62, unsigned int height = 66,
-            const std::string& tileset_s = "C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/tileset.png");
+            const std::string& tileset_s = "Grafiki/tileset.png");
 
     bool load(const std::string &map_file);
     bool loadColissionMap(const std::string& map_file);

@@ -25,11 +25,12 @@ public:
     bool isDamaged();
     void PickUp(std::vector<std::unique_ptr<Bags>> &bags);
 
+
     bool isDam = false;
 
 public:
     //Arrows
-    Arrow arrow = Arrow(sf::Vector2f(4.f, 9.f),"C:/Users/szymo/OneDrive/Game_PSiO/SSD/Grafiki/arrow.png", 10.f);
+    Arrow arrow = Arrow(sf::Vector2f(4.f, 9.f),"Grafiki/arrow.png", 10.f);
     std::vector<std::unique_ptr<Arrow>> arrows_;
 
     int Points = 0;
@@ -43,12 +44,15 @@ private:
 
 
     sf::Clock ShootTimer;
-    sf::Vector2f mousePosWindow_;
-    sf::Vector2f aimDir_;
-    sf::Vector2f aimDirNorm_;
+    sf::Vector2f mousePosition_;
+    sf::Vector2f Mouse_sub_Player_;
+    sf::Vector2f Normalized_;
     sf::Vector2f playerCenter_;
 
     sf::Clock hit_time;
+
+    sf::SoundBuffer healSoundBuf;
+    sf::Sound healSound;
 
 };
 
