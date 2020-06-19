@@ -23,12 +23,15 @@ void HUD::RenderGUI(sf::RenderTarget &target)
 void HUD::RenderWIN(sf::RenderTarget &target)
 {
     target.draw(Win_text);
+    target.draw(Win_text2);
 }
 
 void HUD::RenderMENU(sf::RenderTarget &target)
 {
     target.draw(MenuText1);
     target.draw(MenuText2);
+    target.draw(MenuText3);
+
 }
 
 void HUD::Points(Hero &hero)
@@ -54,24 +57,36 @@ void HUD::initText()
 void HUD::initWinText()
 {
     Win_text.setFont(font);
-    Win_text.setFillColor(sf::Color::White);
+    Win_text.setFillColor(sf::Color::Red);
     Win_text.setCharacterSize(150);
-    Win_text.setPosition(100, 300);
+    Win_text.setPosition(103, 300);
     Win_text.setString("YOU WIN!");
+
+    Win_text2.setFont(font);
+    Win_text2.setFillColor(sf::Color::White);
+    Win_text2.setCharacterSize(30);
+    Win_text2.setPosition(285, 500);
+    Win_text2.setString("Press ESCAPE to exit");
+
 }
 
 void HUD::initMENU()
 {
     MenuText1.setFont(font);
+    MenuText3.setFont(font);
     MenuText1.setFillColor(sf::Color::Red);
-    MenuText1.setCharacterSize(55);
-    MenuText1.setPosition(45, 100);
-    MenuText1.setString("SPOOKY, SCARRY DUNGEON");
+    MenuText3.setFillColor(sf::Color::Red);
+    MenuText1.setCharacterSize(70);
+    MenuText3.setCharacterSize(100);
+    MenuText1.setPosition(150, 40);
+    MenuText3.setPosition(215, 160);
+    MenuText1.setString("SPOOKY, SCARRY");
+    MenuText3.setString("DUNGEON");
 
     MenuText2.setFont(font);
     MenuText2.setFillColor(sf::Color::White);
     MenuText2.setCharacterSize(55);
-    MenuText2.setPosition(100, 600);
+    MenuText2.setPosition(120, 670);
     MenuText2.setString("Press ENTER to play");
 
 

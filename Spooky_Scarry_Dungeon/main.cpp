@@ -6,8 +6,9 @@ int main()
 {
         srand(time(NULL));
         //Window
-        sf::RenderWindow window;
-        sf::RenderWindow MENU(sf::VideoMode(1024, 768), "Spooky, Scarry Dungeon - MENU");
+        sf::RenderWindow  window(sf::VideoMode(1024, 768), "Spooky, Scarry Dungeon");
+        window.setFramerateLimit(60);
+//        window.setVerticalSyncEnabled(true);
 
         //View
         sf::View view;
@@ -47,6 +48,7 @@ int main()
         hud.initText();
         hud.initWinText();
         hud.initMENU();
+        bool MENU_ON = true;
 
         //Map loading
         //-----------------------------------------------------------------------------------------------
@@ -60,25 +62,6 @@ int main()
             return -1;
 
         //-----------------------------------------------------------------------------------------------
-
-            while (MENU.isOpen()){
-                sf::Event event;
-                while (MENU.pollEvent(event)){
-                    if(event.type == sf::Event::Closed)
-                        MENU.close();
-                }
-                hud.RenderMENU(MENU);
-                MENU.display();
-
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-                    MENU.close();
-                }
-            }
-
-        if(MENU.isOpen() == false)
-            window.create(sf::VideoMode(1024, 768), "Spooky, Scarry Dungeon");
-
-        window.setFramerateLimit(60);
 
         // run the main loop
         sf::Clock dtClock;
@@ -95,7 +78,6 @@ int main()
             }   
 
                 //Animating
-                player.Animate(dt, map, view);
                 player.Shooting(map, window);
                 player.PickUp(bags);
                 hud.HP_Update(player);
@@ -164,9 +146,23 @@ int main()
 
                 //HUD draw
                 window.setView(window.getDefaultView());
-                hud.RenderGUI(window);
-                if(rooms.Room_1ON() == false && rooms.Room_2ON() == false && rooms.Room_3ON() == false && rooms.Room_4ON() == false && rooms.Room_5ON() == false)
+
+                if(MENU_ON == true){
+                    hud.RenderMENU(window);
+                        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+                            MENU_ON = false;
+                        }
+                }else{
+                    player.Animate(dt, map, view);
+                    hud.RenderGUI(window);
+                }
+
+                if(rooms.Room_1ON() == false && rooms.Room_2ON() == false && rooms.Room_3ON() == false && rooms.Room_4ON() == false && rooms.Room_5ON() == false){
                     hud.RenderWIN(window);
+                    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+                        window.close();
+                    }
+                }
 
                 window.setView(view);
                 window.display();

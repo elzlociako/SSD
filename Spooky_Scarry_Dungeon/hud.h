@@ -31,8 +31,10 @@ private:
     sf::Font font;
     sf::Text textE;
     sf::Text Win_text;
+    sf::Text Win_text2;
     sf::Text MenuText1;
     sf::Text MenuText2;
+    sf::Text MenuText3;
 
 };
 
