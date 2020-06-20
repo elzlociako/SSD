@@ -81,7 +81,3 @@ bool TileMap::loadColissionMap(const std::string& map_file){
     return true;
 }
 
-void TileMap::change()
-{
-    MapLoaded_ = "Map2.txt";
-}

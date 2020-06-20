@@ -45,11 +45,6 @@ void Hero::Shooting(const TileMap &map, sf::RenderWindow &w)
     }
 }
 
-void Hero::DamageFromSpikes(const TileMap &map, sf::RenderWindow &w)
-{
-
-}
-
 void Hero::render(sf::RenderTarget &target)
 {
     for (size_t i = 0; i < arrows_.size(); i++)

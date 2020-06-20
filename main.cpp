@@ -81,7 +81,6 @@ int main()
                 player.Shooting(map, window);
                 player.PickUp(bags);
                 hud.HP_Update(player);
-                player.DamageFromSpikes(map2, window);
 
     //            //Mouse position
     //            sf::Vector2i pixelPos = sf::Mouse::getPosition(window);

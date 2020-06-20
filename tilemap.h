@@ -11,12 +11,11 @@ public:
 
     bool load(const std::string &map_file);
     bool loadColissionMap(const std::string& map_file);
-    void change();
 
 public:
     std::vector<std::vector<int>> cmap;
     std::vector<std::unique_ptr<int>> number_map;
-    int NUM;
+
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
